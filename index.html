@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BetKing · Casino & Aviator</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #0b0e14;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 12px;
+        }
+
+        /* Phone Frame */
+        .phone {
+            max-width: 400px;
+            width: 100%;
+            background: #0f1219;
+            border-radius: 40px;
+            padding: 16px 12px 20px;
+            box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.8), 0 0 0 2px #1e2630 inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Notch */
+        .notch {
+            width: 120px;
+            height: 24px;
+            background: #0b0e14;
+            margin: 0 auto 8px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            color: #7a8598;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .notch i {
+            font-size: 8px;
+        }
+
+        /* App Header */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 4px 14px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #f5b342, #f0932b);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: #0b0e14;
+            box-shadow: 0 4px 12px rgba(245, 179, 66, 0.3);
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: #f5b342;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            color: #9aa4b8;
+            font-size: 18px;
+        }
+
+        .header-actions i {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .header-actions i:hover {
+            color: #fff;
+        }
+
+        /* Balance Card */
+        .balance-card {
+            background: linear-gradient(145deg, #1a212c, #131a23);
+            border-radius: 20px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            border: 1px solid #2a3442;
+            box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .balance-info .label {
+            font-size: 12px;
+            color: #7a8598;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+        }
+
+        .balance-info .amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .balance-info .amount small {
+            font-size: 16px;
+            font-weight: 500;
+            color: #f5b342;
+            margin-left: 4px;
+        }
+
+        .deposit-btn {
+            background: #f5b342;
+            border: none;
+            color: #0b0e14;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 10px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px rgba(245, 179, 66, 0.35);
+        }
+
+        .deposit-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Quick Payments (KES 5 start) */
+        .quick-pay-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 0 4px;
+        }
+
+        .section-title h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #eef2f6;
+            letter-spacing: -0.2px;
+        }
+
+        .section-title a {
+            font-size: 12px;
+            color: #f5b342;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .pay-chips {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            scrollbar-width: none;
+        }
+
+        .pay-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            background: #1a212c;
+            border: 1px solid #2a3442;
+            padding: 10px 16px;
+            border-radius: 30px;
+            color: #d0d8e5;
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .chip i {
+            font-size: 12px;
+            color: #f5b342;
+        }
+
+        .chip:hover, .chip.active {
+            background: #f5b342;
+            color: #0b0e14;
+            border-color: #f5b342;
+        }
+
+        .chip:hover i, .chip.active i {
+            color: #0b0e14;
+        }
+
+        /* Game Grid (Casino & Aviator) */
+        .games-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .game-card {
+            background: #1a212c;
+            border-radius: 18px;
+            padding: 14px;
+            border: 1px solid #2a3442;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.8);
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #f5b342;
+        }
+
+        .game-card .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #f5b342;
+            color: #0b0e14;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .game-card .icon {
+            font-size: 28px;
+            color: #f5b342;
+            margin-bottom: 8px;
+        }
+
+        .game-card h4 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .game-card p {
+            color: #7a8598;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .game-card .play-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #f5b342;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .game-card .play-indicator i {
+            font-size: 10px;
+        }
+
+        /* Aviator special accent */
+        .game-card.aviator {
+            background: linear-gradient(145deg, #1f2a1a, #162117);
+            border-color: #2a4a2a;
+        }
+
+        .game-card.aviator .icon {
+            color: #6fcf97;
+        }
+
+        .game-card.aviator .badge {
+            background: #6fcf97;
+        }
+
+        .game-card.aviator .play-indicator {
+            color: #6fcf97;
+        }
+
+        .game-card.aviator:hover {
+            border-color: #6fcf97;
+        }
+
+        /* Live Feed / Recent Wins */
+        .live-wins {
+            background: #131a23;
+            border-radius: 18px;
+            padding: 14px 16px;
+            border: 1px solid #2a3442;
+            margin-bottom: 16px;
+            max-height: 140px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #2a3442 #131a23;
+        }
+
+        .live-wins::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .live-wins::-webkit-scrollbar-thumb {
+            background: #2a3442;
+            border-radius: 10px;
+        }
+
+        .win-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #1e2630;
+            font-size: 12px;
+        }
+
+        .win-item:last-child {
+            border-bottom: none;
+        }
+
+        .win-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #b0bccf;
+            font-weight: 500;
+        }
+
+        .win-user i {
+            color: #f5b342;
+            font-size: 12px;
+            width: 16px;
+        }
+
+        .win-amount {
+            color: #6fcf97;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .win-game {
+            color: #7a8598;
+            font-size: 10px;
+            margin-left: 24px;
+            font-weight: 500;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 4px;
+            border-top: 1px solid #1e2630;
+            margin-top: 4px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            color: #5f6b7e;
+            font-size: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+        }
+
+        .nav-item.active {
+            color: #f5b342;
+        }
+
+        .nav-item:hover {
+            color: #d0d8e5;
+        }
+
+        /* Responsive */
+        @media (max-width: 380px) {
+            .phone {
+                padding: 10px 8px 16px;
+            }
+            .balance-info .amount {
+                font-size: 22px;
+            }
+            .game-card h4 {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <!-- Notch (fake status bar) -->
+        <div class="notch">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-full"></i>
+        </div>
+
+        <!-- App Header -->
+        <div class="app-header">
+            <div class="logo">
+                <div class="logo-icon">B</div>
+                <div class="logo-text">Bet<span>King</span></div>
+            </div>
+            <div class="header-actions">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <div class="balance-info">
+                <div class="label">Available Balance</div>
+                <div class="amount">KES 1,250<small>.00</small></div>
+            </div>
+            <button class="deposit-btn" onclick="alert('Deposit modal would open here. Minimum deposit: KES 5')">
+                <i class="fas fa-plus-circle"></i> Deposit
+            </button>
+        </div>
+
+        <!-- Quick Payments (starting KES 5) -->
+        <div class="quick-pay-section">
+            <div class="section-title">
+                <h3>Quick Deposit</h3>
+                <a href="#">View all</a>
+            </div>
+            <div class="pay-chips">
+                <div class="chip" onclick="selectChip(this, 5)"><i class="fas fa-coins"></i> KES 5</div>
+                <div class="chip" onclick="selectChip(this, 10)"><i class="fas fa-coins"></i> KES 10</div>
+                <div class="chip" onclick="selectChip(this, 50)"><i class="fas fa-coins"></i> KES 50</div>
+                <div class="chip active" onclick="selectChip(this, 100)"><i class="fas fa-coins"></i> KES 100</div>
+                <div class="chip" onclick="selectChip(this, 500)"><i class="fas fa-coins"></i> KES 500</div>
+                <div class="chip" onclick="selectChip(this, 1000)"><i class="fas fa-coins"></i> KES 1,000</div>
+            </div>
+        </div>
+
+        <!-- Games Grid -->
+        <div class="games-grid">
+            <!-- Casino Card -->
+            <div class="game-card" onclick="alert('Opening Casino Lobby...')">
+                <div class="badge">HOT</div>
+                <div>
+                    <div class="icon"><i class="fas fa-dice"></i></div>
+                    <h4>Casino</h4>
+                    <p>Slots · Roulette · Blackjack</p>
+                </div>
+                <div class="play-indicator">
+                    <i class="fas fa-play"></i> Play now
+                </div>
+            </div>
+
+            <!-- Aviator Card -->
+            <div class="game-card aviator" onclick="alert('Launching Aviator...')">
+                <div class="badge">LIVE</div>
+                <div>
+                    <div class="icon"><i class="fas fa-plane"></i></div>
+                    <h4>Aviator</h4>
+                    <p>Cash out before it flies</p>
+                </div>
+                <div class="play-indicator">
+                    <i class="fas fa-play"></i> Play now
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Wins Feed -->
+        <div class="live-wins">
+            <div class="win-item">
+                <div class="win-user"><i class="fas fa-circle" style="color:#6fcf97; font-size:8px;"></i> @mike_254</div>
+                <div class="win-amount">+ KES 2,400</div>
+            </div>
+            <div class="win-game">Aviator · 2x multiplier</div>
+            <div class="win-item">
+                <div class="win-user"><i class="fas fa-circle" style="color:#6fcf97; font-size:8px;"></i> @wanjiku</div>
+                <div class="win-amount">+ KES 850</div>
+            </div>
+            <div class="win-game">Casino · Lucky Spin</div>
+            <div class="win-item">
+                <div class="win-user"><i class="fas fa-circle" style="color:#6fcf97; font-size:8px;"></i> @kev_m</div>
+                <div class="win-amount">+ KES 12,000</div>
+            </div>
+            <div class="win-game">Aviator · 24x multiplier</div>
+            <div class="win-item">
+                <div class="win-user"><i class="fas fa-circle" style="color:#6fcf97; font-size:8px;"></i> @faith_254</div>
+                <div class="win-amount">+ KES 320</div>
+            </div>
+            <div class="win-game">Casino · Blackjack</div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active"><i class="fas fa-home"></i> Home</div>
+            <div class="nav-item"><i class="fas fa-dice"></i> Casino</div>
+            <div class="nav-item"><i class="fas fa-plane"></i> Aviator</div>
+            <div class="nav-item"><i class="fas fa-wallet"></i> Wallet</div>
+            <div class="nav-item"><i class="fas fa-user"></i> Account</div>
+        </div>
+    </div>
+
+    <script>
+        // Chip selection interaction
+        function selectChip(element, amount) {
+            // Remove active class from all chips
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            // Add active class to clicked chip
+            element.classList.add('active');
+            // Simulate deposit action
+            console.log(`Selected deposit amount: KES ${amount}`);
+            // In a real app, this would update the balance or open a payment flow
+        }
+
+        // Add subtle animation to game cards on click
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.97)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Simulate live updates to the wins feed (just for demo realism)
+        const winFeed = document.querySelector('.live-wins');
+        const users = ['@brian_254', '@shiro', '@kamau', '@nyambura', '@otieno', '@chebet'];
+        const games = ['Aviator · 1.5x', 'Casino · Slots', 'Aviator · 5x', 'Casino · Roulette', 'Aviator · 12x'];
+
+        function addRandomWin() {
+            const user = users[Math.floor(Math.random() * users.length)];
+            const game = games[Math.floor(Math.random() * games.length)];
+            const amount = Math.floor(Math.random() * 5000) + 50;
+            
+            const winItem = document.createElement('div');
+            winItem.className = 'win-item';
+            winItem.innerHTML = `
+                <div class="win-user"><i class="fas fa-circle" style="color:#6fcf97; font-size:8px;"></i> ${user}</div>
+                <div class="win-amount">+ KES ${amount.toLocaleString()}</div>
+            `;
+            
+            const gameItem = document.createElement('div');
+            gameItem.className = 'win-game';
+            gameItem.textContent = game;
+
+            // Insert at top
+            if (winFeed.firstChild) {
+                winFeed.insertBefore(gameItem, winFeed.firstChild);
+                winFeed.insertBefore(winItem, gameItem);
+            } else {
+                winFeed.appendChild(winItem);
+                winFeed.appendChild(gameItem);
+            }
+
+            // Keep the feed from getting too long
+            if (winFeed.children.length > 12) {
+                winFeed.removeChild(winFeed.lastChild);
+                winFeed.removeChild(winFeed.lastChild);
+            }
+        }
+
+        // Add a new win every 8 seconds to simulate live activity
+        setInterval(addRandomWin, 8000);
+    </script>
+</body>
+</html>
